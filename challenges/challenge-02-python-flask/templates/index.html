@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Products</h2>
+{% for product in products %}
+<div class="product">
+    <h3><a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a></h3>
+    <p>Price: ${{ product.price }}</p>
+    {% if session.user_id %}
+    <form method="POST" action="{{ url_for('add_to_cart') }}" style="display: inline;">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <input type="number" name="quantity" value="1" min="1" style="width: 60px;">
+        <button type="submit">Add to Cart</button>
+    </form>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
+

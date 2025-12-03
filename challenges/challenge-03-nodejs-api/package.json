@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-api-challenge",
+  "version": "1.0.0",
+  "description": "OSWE Challenge 3: Node.js REST API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "init-db": "node init_db.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6"
+  }
+}
+

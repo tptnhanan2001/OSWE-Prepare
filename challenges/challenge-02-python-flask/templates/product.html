@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ product.name }}</h2>
+<p><strong>Price:</strong> ${{ product.price }}</p>
+<div>
+    <h3>Description:</h3>
+    {# VULNERABILITY: SSTI - Product description is rendered directly #}
+    {# If we can control description, we can inject template code #}
+    {{ product.description|safe }}
+</div>
+{% if session.user_id %}
+<form method="POST" action="{{ url_for('add_to_cart') }}">
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <input type="number" name="quantity" value="1" min="1">
+    <button type="submit">Add to Cart</button>
+</form>
+{% endif %}
+{% endblock %}
+

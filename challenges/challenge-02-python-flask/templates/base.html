@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}E-Commerce{% endblock %}</title>
+    <style>
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        nav a { margin: 0 10px; color: #0066cc; text-decoration: none; }
+        .flash { padding: 10px; margin: 10px 0; background: #f0f0f0; border-radius: 5px; }
+        .product { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>E-Commerce Store</h1>
+        <div>
+            {% if session.username %}
+                <span>Welcome, {{ session.username }}</span>
+                {% if session.role == 'admin' %}
+                    <span style="color: #d00;">(Admin)</span>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if session.user_id %}
+            <a href="{{ url_for('cart') }}">Cart</a>
+        {% endif %}
+        {% if session.role == 'admin' %}
+            <a href="{{ url_for('admin') }}">Admin</a>
+            <a href="{{ url_for('admin_products') }}">Manage Products</a>
+        {% endif %}
+    </nav>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    {% block content %}{% endblock %}
+</body>
+</html>
+

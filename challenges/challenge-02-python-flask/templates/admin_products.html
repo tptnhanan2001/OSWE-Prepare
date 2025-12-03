@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Manage Products</h2>
+<h3>Add New Product</h3>
+<form method="POST" action="{{ url_for('admin_add_product') }}">
+    <div style="margin: 10px 0;">
+        <label>Name:</label><br>
+        <input type="text" name="name" required style="width: 300px; padding: 8px;">
+    </div>
+    <div style="margin: 10px 0;">
+        <label>Description:</label><br>
+        <textarea name="description" style="width: 300px; height: 100px; padding: 8px;"></textarea>
+    </div>
+    <div style="margin: 10px 0;">
+        <label>Price:</label><br>
+        <input type="number" name="price" step="0.01" required style="width: 300px; padding: 8px;">
+    </div>
+    <button type="submit" style="padding: 10px 20px; background: #0066cc; color: white; border: none; cursor: pointer;">Add Product</button>
+</form>
+
+<h3>Existing Products</h3>
+{% for product in products %}
+<div class="product">
+    <h4>{{ product.name }}</h4>
+    <p>Price: ${{ product.price }}</p>
+    <p>Description: {{ product.description }}</p>
+</div>
+{% endfor %}
+{% endblock %}
+

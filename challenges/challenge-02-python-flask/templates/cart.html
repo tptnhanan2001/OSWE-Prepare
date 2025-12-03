@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Shopping Cart</h2>
+{% if cart_items %}
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>${{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.price * item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"><strong>Total:</strong></td>
+            <td><strong>${{ total }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+<form method="POST" action="{{ url_for('checkout') }}">
+    <input type="hidden" name="total" value="{{ total }}">
+    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background: #0066cc; color: white; border: none; cursor: pointer;">Checkout</button>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}
+

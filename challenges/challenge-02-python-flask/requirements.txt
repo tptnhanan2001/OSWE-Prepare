@@ -1,0 +1,5 @@
+Flask==2.3.3
+Werkzeug==2.3.7
+redis==5.0.1
+requests==2.31.0
+
