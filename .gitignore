@@ -67,7 +67,7 @@ logs/
 *.log
 
 # OSWE specific
-solutions/
+# solutions/ - Commented out to allow solutions to be committed
 *.ova
 *.ovf
 *.box
